@@ -58,11 +58,15 @@ public class SumOfProductsWithKSizeSubset {
     
     
     //naive approach
+    
+    // storing the k value , so that it can be easily accessed
     static int K;
+    
+
     public static int sumOfProduct2(int arr[], int n,int k)
     {
         K = k;
-        // create sub array
+        // creat
         ArrayList<ArrayList<Integer>>res= new ArrayList<>();
         ArrayList<Integer>temp = new ArrayList<>();
         
@@ -73,36 +77,47 @@ public class SumOfProductsWithKSizeSubset {
         return getSum(res);
     }
     
+    // Generate all Subsrray with size K
     static void solve(int arr[] ,ArrayList<ArrayList<Integer>>res , 
-      ArrayList<Integer>temp , int x)
+      ArrayList<Integer>temp , int index)
       {
-          
+          /*
+            when we get the required subset , we
+            add into the result list and return
+          */
           if(temp.size()==K ){
               res.add(new ArrayList<>(temp));
               return;
           }
           
-          for(int i=x ; i<arr.length ; i++)
-          {
+          // otherwise we add current element , 
+          //and move forward to add next element in our subset
+          for(int i=index ; i<arr.length ; i++)
+          {              
               temp.add(arr[i]);
+                            
               solve(arr, res, temp, i+1);
+              
+              // removing the last element , for backtracking
               temp.remove(temp.size()-1);
           }
       }
 
+    // it returns sum of all the multiplied Subset
     private static int getSum(ArrayList<ArrayList<Integer>> res) {
         
-        int sum=0 , mod= 1000000007;
+        int sum=0 , MOD= 1000000007;
         for(ArrayList<Integer>tempList : res)
         {
             long tempSum=1;
             for(int val : tempList){
-                tempSum *= val;
-                tempSum %= mod;
+                tempSum *=  val % MOD;
+                tempSum %= MOD;
             }
             
             sum += tempSum;            
         }
-        return sum % mod;
+        // we are doing % operation  , so that our result should not get overflow
+        return sum % MOD;
     }
 }
