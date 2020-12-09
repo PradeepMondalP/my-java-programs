@@ -5,22 +5,24 @@
  */
 package roughWorking;
 
+import java.math.*;
 import java.util.*;
 
 public class sample1 {
     
     public static void main(String[] args) {
         
-        TreeSet<Integer>set = new TreeSet<>();
-        PriorityQueue<Integer>pq = new PriorityQueue<>();
-        
-        
-        set.add(10);
-        set.add(20);
-        set.add(30);set.add(40);
-        
-        System.out.println(set.ceiling(41));
-        System.out.println(set.floor(9));
+       BigInteger bg = new BigInteger("10");
+       BigInteger bg2 = new BigInteger("200");
+       
+       bg = bg.add(bg2);
+       
+      //  System.out.println(bg);
+      
+      
+      StringBuffer sb = new StringBuffer("abcdefghi");
+      sb.setLength(sb.length()-1);
+        System.out.println(sb);
         
     }
     
